@@ -76,23 +76,13 @@ const GuestbookPage = () => {
               <div className="msg" key={message.ts}>
                 <div>
                   <p>{message.data.message.trim()}</p>
+                  <button className="delete-btn"
+                    onClick={deleteMsg(message.ref)}
+                  >
+                  </button>
                 </div>
                 <h2 className="msg-author">
                   {message.data.name}
-                  <button
-                    style={{
-                      margin: 0,
-                      padding: 0,
-                      marginLeft: "1em",
-                      border: 0,
-                      cursor: "pointer",
-                      zIndex: 99,
-                      backgroundColor: "rgba(0,0,0,0.05)",
-                    }}
-                    onClick={deleteMsg(message.ref)}
-                  >
-                    <small>x</small>
-                  </button>
                 </h2>
               </div>
             ))

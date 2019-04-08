@@ -159,6 +159,10 @@ button:focus {
   margin-top: 40px;
 }
 
+.revengers .msg div {
+  position: relative;
+}
+
 .revengers .msg p,
 .revengers .msg-author,
 .revengers input,
@@ -277,4 +281,31 @@ form label {
 .submit-btn:hover,
 .submit-btn:focus {
   background: #D37200;
+}
+
+.delete-btn {
+    visibility: hidden;
+    content: "";
+    position: absolute;
+    top: -16px;
+    left: 16px;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: #81040C;
+    border: 2px solid #000;
+    padding: 0;
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNCIgaGVpZ2h0PSIxNCIgdmlld0JveD0iMCAwIDE0IDE0Ij4gIDxwYXRoIGZpbGw9IiNBRDI4MzEiIGQ9Ik04LDE1IEM0LjEzNDAwNjc1LDE1IDEsMTEuODY1OTkzMiAxLDggQzEsNC4xMzQwMDY3NSA0LjEzNDAwNjc1LDEgOCwxIEMxMS44NjU5OTMyLDEgMTUsNC4xMzQwMDY3NSAxNSw4IEMxNSwxMS44NjU5OTMyIDExLjg2NTk5MzIsMTUgOCwxNSBaIE0xMC40NDM1MiwxMC43MjMzMTA1IEwxMC40NTI4Mjk2LDEwLjczMjYyMDEgTDEwLjczMjYyMDEsMTAuNDUyODI5NiBDMTEuMDMxMDYzMiwxMC4xNTQzODY1IDExLjAzMTQ5ODYsOS42Njk4NTE3MSAxMC43MzM1OTEyLDkuMzcxOTQ0MzcgTDkuMzY1MDc5MzcsOC4wMDM0MzI1IEwxMC43MzYwNTI2LDYuNjMyNDU5MjggQzExLjAzNDQ5NTcsNi4zMzQwMTYxMyAxMS4wMzQ5MzExLDUuODQ5NDgxMzUgMTAuNzM3MDIzNyw1LjU1MTU3NDAxIEwxMC40NDg0MjYsNS4yNjI5NzYyNyBDMTAuMTUwNTE4Niw0Ljk2NTA2ODkyIDkuNjY1OTgzODcsNC45NjU1MDQyNiA5LjM2NzU0MDcyLDUuMjYzOTQ3NDEgTDguMDA1ODkzODUsNi42MjU1OTQyOCBMNi42MzczODE5OCw1LjI1NzA4MjQxIEM2LjMzOTQ3NDY0LDQuOTU5MTc1MDcgNS44NTQ5Mzk4Niw0Ljk1OTYxMDQxIDUuNTU2NDk2NzEsNS4yNTgwNTM1NiBMNS4yNjczNzk5MSw1LjU0NzE3MDM2IEM0Ljk2ODkzNjc2LDUuODQ1NjEzNTEgNC45Njg1MDE0Miw2LjMzMDE0ODI5IDUuMjY2NDA4NzYsNi42MjgwNTU2MyBMNi42MjU2MTEwMyw3Ljk4NzI1NzkgTDUuMjU0NjM3ODEsOS4zNTgyMzExMiBDNC45NTYxOTQ2Niw5LjY1NjY3NDI3IDQuOTU1NzU5MzIsMTAuMTQxMjA5IDUuMjUzNjY2NjYsMTAuNDM5MTE2NCBMNS41NDIyNjQ0LDEwLjcyNzcxNDEgQzUuODQwMTcxNzUsMTEuMDI1NjIxNSA2LjMyNDcwNjUyLDExLjAyNTE4NjEgNi42MjMxNDk2NywxMC43MjY3NDMgTDcuOTk0MTIyODksOS4zNTU3Njk3NiBMOS4zNjI2MzQ3NiwxMC43MjQyODE2IEM5LjY2MDU0MjExLDExLjAyMjE4OSAxMC4xNDUwNzY5LDExLjAyMTc1MzYgMTAuNDQzNTIsMTAuNzIzMzEwNSBaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMSAtMSkiLz48L3N2Zz4=);
+    background-size: 100% 100%;
+    background-color: #fff;
+    z-index: 99;
+}
+
+.delete-btn:hover {
+  background-color: #fff;
+  transform: scale(1.1);
+}
+
+.msg:hover .delete-btn {
+  visibility: visible;
 }
