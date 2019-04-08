@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react"
 
 import Layout from "../components/layout"
+import { withPrefix } from 'gatsby'
 
 const GuestbookPage = () => {
   const [messages, setMessages] = useState(null)
@@ -36,49 +37,54 @@ const GuestbookPage = () => {
   }, [])
 
   return (
-    <Layout>
-      <h1>Guestbook!</h1>
+    <div className="revengers">
+      <div className="chicken-wrap">
+        <div className="revengers-title">
+          <img src={withPrefix('/RevengersLogo@2x.png')} alt="Logo" />
+          <h2>A messaging app for super-villans</h2>
+        </div>
 
-      {messages === null && <div>Loading guestbook...</div>}
-      {messages &&
-        messages.map(message => (
-          <div className="msg" key={message.ts}>
-            <h2>{message.data.name}</h2>
-            <div>
-              {message.data.message.split(/\n/).map((line, i) => (
-                <p key={i}>{line}</p>
-              ))}
+        {messages === null && <div>Loading guestbook...</div>}
+        {messages &&
+          messages.map(message => (
+            <div className="msg" key={message.ts}>
+              <div>
+                {message.data.message.split(/\n/).map((line, i) => (
+                  <p key={i}>{line}</p>
+                ))}
+              </div>
+              <h2 className="msg-author">{message.data.name}</h2>
             </div>
-          </div>
-        ))}
+          ))}
 
-      <div>
-        <form className="guestbook-form" onSubmit={submit}>
-          <div className="form-control">
-            <label>Your name:</label>
-            <input
-              type="text"
-              value={message.name}
-              onChange={e => setMessage({ ...message, name: e.target.value })}
-            />
-          </div>
-          <div className="form-control">
-            <label>Your message:</label>
-            <textarea
-              value={message.message}
-              onChange={e =>
-                setMessage({ ...message, message: e.target.value })
-              }
-            />
-          </div>
-          <div className="form-control">
-            <button type="submit" disabled={saving}>
-              {saving ? "Submitting..." : "Submit"}
-            </button>
-          </div>
-        </form>
+        <div>
+          <form className="guestbook-form" onSubmit={submit}>
+            <div className="form-control">
+              <label>Your evil name:</label>
+              <input
+                type="text"
+                value={message.name}
+                onChange={e => setMessage({ ...message, name: e.target.value })}
+              />
+            </div>
+            <div className="form-control">
+              <label>Your evil message:</label>
+              <textarea
+                value={message.message}
+                onChange={e =>
+                  setMessage({ ...message, message: e.target.value })
+                }
+              />
+            </div>
+            <div className="form-control">
+              <button className="submit-btn" type="submit" disabled={saving}>
+                {saving ? "Sending..." : "SEND MESSAGE, in a evil way"}
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
-    </Layout>
+    </div>
   )
 }
 

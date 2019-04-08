@@ -116,3 +116,164 @@ button:focus {
   color: #fff;
   cursor: pointer;
 }
+
+/* Revengers micro-site */
+
+.revengers {
+  position: absolute;
+  width: 100vw;
+  min-height: 100vh;
+  background-image:
+    linear-gradient(-180deg, rgba(7,7,7,0.77) 0%, rgba(7,7,7,0.55) 16%, rgba(14,30,37,0.50) 100%),
+    url(https://images.unsplash.com/photo-1519810755548-39cd217da494?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2734&q=80);
+  background-size: cover;
+  overflow: hidden;
+}
+
+.chicken-wrap {
+  width: 90%;
+  max-width: 600px;
+  margin: auto;
+}
+
+.revengers-title {
+  text-align: center;
+  margin: 64px auto;
+}
+
+.revengers-title img {
+  width: 100%;
+  max-width: 438px;
+}
+.revengers-title h2 {
+  display: inline-block;
+  font-size: 22px;
+  color: white;
+  border-top: solid 4px #AD2831;
+  border-bottom: solid 4px #AD2831;
+  padding: 8px;
+}
+
+.revengers .msg {
+  margin-top: 40px;
+}
+
+.revengers .msg p,
+.revengers .msg-author,
+.revengers input,
+.revengers textarea,
+.submit-btn {
+  position: relative;
+  background: #FFFFFF;
+  border: 3px solid #000000;
+  font-weight: 500;
+  color: #050509;
+}
+
+.revengers .msg p {
+  border-radius: 54px 54px 0 54px;
+  font-size: 22px;
+  z-index: 1;
+  padding: 16px 50px;
+}
+
+.revengers .msg p:before {
+  content: " ";
+  position: absolute;
+  z-index: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border: 2px solid #AD2831;
+  border-radius: 54px 54px 0 54px;
+}
+
+.msg-author {
+  position: relative;
+  top: -24px;
+  right: -4px;
+  margin: 5px;
+  background: #D7D7D7;
+  border: 3px solid #000000;
+  border-radius: 8px;
+  font-size: 18px;
+  font-weight: 500;
+  padding: 4px 8px;
+  color: #050509;
+  z-index: 2;
+  width: auto;
+  float: right;
+}
+
+.msg-author:before {
+  content: " ";
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border: 2px solid #AD2831;
+  border-radius: 4px;
+}
+.guestbook-form {
+  margin-top: 104px;
+  border-top: 4px;
+  border-top: solid 4px #AD2831;
+  padding-top: 40px;
+}
+
+.revengers input,
+.revengers textarea,
+.submit-btn {
+  font-size: 22px;
+  padding: 16px;
+  margin-bottom: 16px;
+  border-radius: 8px;
+  max-width: 600px;
+  box-sizing: border-box;
+}
+
+form label {
+  position: relative;
+  display: inline-block;
+  margin: 0;
+  top: 2px;
+  background: #050509;
+  float: left;
+  color: white;
+  border-radius: 8px 8px 0 0;
+  font-size: 18px;
+  font-weight: 500;
+  padding: 4px 8px;
+  z-index: 2;
+  width: auto;
+}
+
+.submit-btn {
+  margin: 0;
+  color: white;
+  font-size: 22px;
+  font-weight: 600;
+  border-radius: 12px;
+  width: 100%;
+  background: #81040C;
+}
+
+.submit-btn::after {
+  content: " ";
+  position: absolute;
+  z-index: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border: 2px solid #D37200;
+  border-radius: 8px;
+}
+
+.submit-btn:hover,
+.submit-btn:focus {
+  background: #D37200;
+}
