@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react"
 
-import Layout from "../components/layout"
-import { withPrefix } from 'gatsby'
+import { withPrefix } from "gatsby"
 
 const GuestbookPage = () => {
   const [messages, setMessages] = useState(null)
@@ -40,8 +39,8 @@ const GuestbookPage = () => {
     <div className="revengers">
       <div className="chicken-wrap">
         <div className="revengers-title">
-          <img src={withPrefix('/RevengersLogo@2x.png')} alt="Logo" />
-          <h2>A messaging app for super-villans</h2>
+          <img src={withPrefix("/RevengersLogo@2x.png")} alt="Logo" />
+          <h2>A messaging app for super-villains</h2>
         </div>
 
         {messages === null && <div>Loading guestbook...</div>}
