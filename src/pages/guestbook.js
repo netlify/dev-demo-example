@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react"
 
-import Layout from "../components/layout"
-import { withPrefix } from 'gatsby'
+// import Layout from "../components/layout"
+import { withPrefix } from "gatsby"
 
 const GuestbookPage = () => {
   const [messages, setMessages] = useState(null)
@@ -31,30 +31,71 @@ const GuestbookPage = () => {
       .then(() => setSaving(false))
   }
 
+  console.log({ messages })
+  const deleteMsg = ref => e => {
+    console.log({ ref })
+    e.preventDefault()
+    setSaving(true)
+    const idToDelete = ref["@ref"].id
+    fetch("/.netlify/functions/fauna/" + idToDelete, {
+      method: "DELETE",
+    })
+      // optimistic
+      .then(() => {
+        console.log({ idToDelete })
+        const newMsgs = messages.filter(
+          msg => msg.ref["@ref"].id !== idToDelete
+        )
+        console.log({ newMsgs })
+        setMessages(messages.filter(msg => msg.ref["@ref"].id !== idToDelete))
+      })
+  }
+
   useEffect(() => {
     poll()
     return () => (polling = false)
   }, [])
-
   return (
     <div className="revengers">
       <div className="chicken-wrap">
         <div className="revengers-title">
-          <img src={withPrefix('/RevengersLogo@2x.png')} alt="Logo" />
+          <img src={withPrefix("/RevengersLogo@2x.png")} alt="Logo" />
           <h2>A messaging app for super-villans</h2>
         </div>
 
         {messages === null && <div>Loading guestbook...</div>}
         {messages &&
-          messages.map(message => (
-            <div className="msg" key={message.ts}>
-              <div>
-                {message.data.message.split(/\n/).map((line, i) => (
-                  <p key={i}>{line}</p>
-                ))}
-              </div>
-              <h2 className="msg-author">{message.data.name}</h2>
+          (messages.name === "BadRequest" ? (
+            <div>
+              Bad Request - you may have forgotten to setup your Fauna DB addon
+              and run{" "}
+              <pre>netlify dev:exec functions/fauna/create-schema.js</pre>
             </div>
+          ) : (
+            messages.map(message => (
+              <div className="msg" key={message.ts}>
+                <div>
+                  <p>{message.data.message.trim()}</p>
+                </div>
+                <h2 className="msg-author">
+                  {message.data.name}
+                  <button
+                    style={{
+                      margin: 0,
+                      padding: 0,
+                      marginLeft: "1em",
+                      border: 0,
+                      cursor: "pointer",
+                      zIndex: 99,
+                      backgroundColor: "rgba(0,0,0,0.05)",
+                    }}
+                    onClick={deleteMsg(message.ref)}
+                  >
+                    <small>x</small>
+                  </button>
+                </h2>
+              </div>
+            ))
           ))}
 
         <div>
@@ -64,6 +105,7 @@ const GuestbookPage = () => {
               <input
                 type="text"
                 value={message.name}
+                required
                 onChange={e => setMessage({ ...message, name: e.target.value })}
               />
             </div>
@@ -71,6 +113,7 @@ const GuestbookPage = () => {
               <label>Your evil message:</label>
               <textarea
                 value={message.message}
+                required
                 onChange={e =>
                   setMessage({ ...message, message: e.target.value })
                 }
