@@ -33,22 +33,23 @@ const GuestbookPage = () => {
 
   console.log({ messages })
   const deleteMsg = ref => e => {
-    console.log({ ref })
     e.preventDefault()
     setSaving(true)
-    const idToDelete = ref["@ref"].id
+    try {
+      const idToDelete = ref["@ref"].id
+      // optimistic
+      const newMsgs = messages.filter(msg => msg.ref["@ref"].id !== idToDelete)
+      setMessages(messages.filter(msg => msg.ref["@ref"].id !== idToDelete))
+    } catch {
+      console.error(
+        "error optimistically deleting, probably from overeager click",
+        idToDelete
+      )
+    }
+    // actual deletion
     fetch("/.netlify/functions/fauna/" + idToDelete, {
       method: "DELETE",
-    })
-      // optimistic
-      .then(() => {
-        console.log({ idToDelete })
-        const newMsgs = messages.filter(
-          msg => msg.ref["@ref"].id !== idToDelete
-        )
-        console.log({ newMsgs })
-        setMessages(messages.filter(msg => msg.ref["@ref"].id !== idToDelete))
-      })
+    }).catch(err => console.error("error deleting", err))
   }
 
   useEffect(() => {
@@ -65,10 +66,10 @@ const GuestbookPage = () => {
 
         {messages === null && <div>Loading guestbook...</div>}
         {messages &&
-          (messages.name === "BadRequest" ? (
-            <div>
-              Bad Request - you may have forgotten to setup your Fauna DB addon
-              and run{" "}
+          (["BadRequest", "Unauthorized"].includes(messages.name) ? (
+            <div style={{ border: "1px solid red", color: "yellow" }}>
+              Bad/Unauthorized Request - you may have forgotten to setup your
+              Fauna DB addon (<pre>netlify addons:create fauna</pre>) and run{" "}
               <pre>netlify dev:exec functions/fauna/create-schema.js</pre>
             </div>
           ) : (
@@ -76,14 +77,12 @@ const GuestbookPage = () => {
               <div className="msg" key={message.ts}>
                 <div>
                   <p>{message.data.message.trim()}</p>
-                  <button className="delete-btn"
+                  <button
+                    className="delete-btn"
                     onClick={deleteMsg(message.ref)}
-                  >
-                  </button>
+                  />
                 </div>
-                <h2 className="msg-author">
-                  {message.data.name}
-                </h2>
+                <h2 className="msg-author">{message.data.name}</h2>
               </div>
             ))
           ))}
