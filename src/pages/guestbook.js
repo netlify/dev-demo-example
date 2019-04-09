@@ -34,7 +34,6 @@ const GuestbookPage = () => {
     poll()
     return () => (polling = false)
   }, [])
-
   return (
     <div className="revengers">
       <div className="chicken-wrap">
@@ -45,15 +44,21 @@ const GuestbookPage = () => {
 
         {messages === null && <div>Loading guestbook...</div>}
         {messages &&
-          messages.map(message => (
-            <div className="msg" key={message.ts}>
-              <div>
-                {message.data.message.split(/\n/).map((line, i) => (
-                  <p key={i}>{line}</p>
-                ))}
-              </div>
-              <h2 className="msg-author">{message.data.name}</h2>
+          (["BadRequest", "Unauthorized"].includes(messages.name) ? (
+            <div style={{ border: "1px solid red", color: "yellow" }}>
+              Bad/Unauthorized Request - you may have forgotten to setup your
+              Fauna DB addon (<pre>netlify addons:create fauna</pre>) and run{" "}
+              <pre>netlify dev:exec functions/fauna/create-schema.js</pre>
             </div>
+          ) : (
+            messages.map(message => (
+              <div className="msg" key={message.ts}>
+                <div>
+                  <p>{message.data.message.trim()}</p>
+                </div>
+                <h2 className="msg-author">{message.data.name}</h2>
+              </div>
+            ))
           ))}
 
         <div>
@@ -63,6 +68,7 @@ const GuestbookPage = () => {
               <input
                 type="text"
                 value={message.name}
+                required
                 onChange={e => setMessage({ ...message, name: e.target.value })}
               />
             </div>
@@ -70,6 +76,7 @@ const GuestbookPage = () => {
               <label>Your evil message:</label>
               <textarea
                 value={message.message}
+                required
                 onChange={e =>
                   setMessage({ ...message, message: e.target.value })
                 }
